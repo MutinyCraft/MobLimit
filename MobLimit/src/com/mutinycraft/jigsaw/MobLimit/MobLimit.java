@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class MobLimit extends JavaPlugin implements Listener {
 
 	Logger log;
-	private static final String VERSION = "1.0";
+	private static final String VERSION = "1.1";
 
 	private static final EntityType CAVE_SPIDER = EntityType.CAVE_SPIDER;
 	private static final EntityType SKELETON = EntityType.SKELETON;
@@ -29,7 +29,8 @@ public class MobLimit extends JavaPlugin implements Listener {
 	@EventHandler
 	public void SpawnerEvent(CreatureSpawnEvent e) {
 		EntityType type = e.getEntityType();
-		if (e.getSpawnReason() == SpawnReason.SPAWNER) {
+		if (e.getSpawnReason() == SpawnReason.SPAWNER
+				&& !e.getLocation().getWorld().getName().equalsIgnoreCase("BG")) {
 			if (type == CAVE_SPIDER || type == SKELETON || type == SPIDER
 					|| type == ZOMBIE) {
 				e.setCancelled(true);
